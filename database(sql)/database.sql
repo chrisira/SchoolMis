@@ -1,0 +1,138 @@
+CREATE DATABASE db_school;
+use db_school;
+
+CREATE TABLE users
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    names VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(100) NOT NULL,
+    status VARCHAR(100) NOT NULL DEFAULT "active",
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE jobs
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE salaries
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    job_id int,
+    amount VARCHAR(200) NOT NULL,
+    FOREIGN KEY(job_id) REFERENCES jobs(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE employees
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    names VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    job_id int,
+    status VARCHAR(100) NOT NULL DEFAULT "active",
+    FOREIGN KEY(job_id) REFERENCES jobs(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE subjects
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    credits int,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE assign_subjects
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    employee_id int,
+    subject_id int,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE school_year
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    school_year VARCHAR(200),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE class
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    names VARCHAR(100) NOT NULL UNIQUE,
+    school_year int,
+    FOREIGN KEY(school_year) REFERENCES school_year(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE class_subjects
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    class_id int,
+    subject_id int,
+    FOREIGN KEY(class_id) REFERENCES class(id),
+    FOREIGN KEY(subject_id) REFERENCES subjects(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE shifts
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    names VARCHAR(100) NOT NULL UNIQUE,
+    class_id int,
+    FOREIGN KEY(class_id) REFERENCES class(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE students
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    names VARCHAR(200) NOT NULL,
+    age VARCHAR(200) NOT NULL,
+    sex VARCHAR(200) NOT NULL,
+    class_id int,
+    FOREIGN KEY(class_id) REFERENCES class(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE grades
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    grade_name VARCHAR(200),
+    grade_value VARCHAR(200) NOT NULL,
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE student_marks
+(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    student_id int,
+    grade_id int,
+    subject_id int,
+    marks VARCHAR(244),
+    FOREIGN KEY(student_id) REFERENCES students(id),
+    FOREIGN KEY(grade_id) REFERENCES grades(id),
+    FOREIGN KEY(subject_id) REFERENCES subjects(id),
+    createdAt TIMESTAMP DEFAULT NOW(),
+    updatedAt TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP
+);
+

@@ -1,0 +1,208 @@
+<?php
+
+require_once("app/bootstrap.php");
+
+$credentials = isLoggedIn();
+if(($credentials == null && $credentials[0] == null) || $credentials[0] != '' && $credentials[1] == '' || $credentials[2] != "admin"){
+  redirect($credentials[0],$credentials[1],$credentials[2]);
+}
+
+?>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8" />
+<title>School management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="" name="description" />
+<meta content="Themesdesign" name="author" />
+<!-- App favicon -->
+<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+<!-- jquery.vectormap css -->
+<link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+<!-- DataTables -->
+<link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Responsive datatable examples -->
+<link href="assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />  
+
+<!-- Bootstrap Css -->
+<link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<!-- Icons Css -->
+<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body data-topbar="dark">
+
+<!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+<?php require_once('header.php');?>
+<!-- ========== Left Sidebar Start ========== -->
+<? require_once('sidebar.php') ?>
+<!-- Left Sidebar End -->
+
+
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+<div class="page-content">
+<div class="container-fluid">
+    
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            
+        </div>
+    </div>
+    <!-- end page title -->
+
+<div class="row">
+<div class="col-xl-3 col-md-6">
+<div class="card">
+<div class="card-body">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <p class="text-truncate font-size-14 mb-2">Total classes</p>
+            <h4 class="mb-2"><?php echo $total_classes; ?></h4>
+            
+        </div>
+        <div class="avatar-sm">
+            <span class="avatar-title bg-light text-primary rounded-3">
+                <i class="ri-pencil-ruler-2-fill font-size-24"></i>  
+            </span>
+        </div>
+    </div>                                            
+</div><!-- end cardbody -->
+</div><!-- end card -->
+</div><!-- end col -->
+<div class="col-xl-3 col-md-6">
+<div class="card">
+<div class="card-body">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <p class="text-truncate font-size-14 mb-2">Total students</p>
+            <h4 class="mb-2"><?php echo $total_students; ?></h4>
+            
+        </div>
+        <div class="avatar-sm">
+            <span class="avatar-title bg-light text-success rounded-3">
+                <i class="ri-group-line font-size-24"></i>  
+            </span>
+        </div>
+    </div>                                              
+</div><!-- end cardbody -->
+</div><!-- end card -->
+</div><!-- end col -->
+<div class="col-xl-3 col-md-6">
+<div class="card">
+<div class="card-body">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <p class="text-truncate font-size-14 mb-2">Total Employees</p>
+            <h4 class="mb-2"><?php echo $total_employees; ?></h4>
+            
+        </div>
+        <div class="avatar-sm">
+            <span class="avatar-title bg-light text-primary rounded-3">
+                <i class="ri-team-fill font-size-24"></i>  
+            </span>
+        </div>
+    </div>                                              
+</div><!-- end cardbody -->
+</div><!-- end card -->
+</div><!-- end col -->
+<div class="col-xl-3 col-md-6">
+<div class="card">
+<div class="card-body">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <p class="text-truncate font-size-14 mb-2">Subjects</p>
+            <h4 class="mb-2"><?php echo $total_subjects; ?></h4>
+            
+        </div>
+        <div class="avatar-sm">
+            <span class="avatar-title bg-light text-success rounded-3">
+                <i class="ri-calendar-todo-fill font-size-24"></i>  
+            </span>
+        </div>
+    </div>                                              
+</div><!-- end cardbody -->
+</div><!-- end card -->
+</div><!-- end col -->
+</div><!-- end row -->
+
+
+<!-- end row -->
+</div>
+
+</div>
+<!-- End Page-content -->
+
+<?php require_once('footer.php'); ?>
+
+</div>
+<!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+<!-- Right Sidebar -->
+
+<!-- Settings -->
+
+
+
+</div>
+
+</div> <!-- end slimscroll-menu-->
+</div>
+<!-- /Right-bar -->
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
+
+<!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+
+
+<!-- apexcharts -->
+<script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+<!-- jquery.vectormap map -->
+<script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
+
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<script src="assets/js/pages/dashboard.init.js"></script>
+
+<!-- App js -->
+<script src="assets/js/app.js"></script>
+</body>
+
+</html>
